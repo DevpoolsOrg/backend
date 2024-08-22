@@ -36,9 +36,10 @@ export class AuthController {
 
   @Get('logout')
   @Auth()
+  @HttpCode(204)
   logout(@Res({ passthrough: true }) response: Response) {
     response.clearCookie('access_token');
-    return { message: 'Logout success' };
+    return
   };
 
   @Get('check-auth-status')

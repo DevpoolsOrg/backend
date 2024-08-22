@@ -12,9 +12,8 @@ async function bootstrap() {
 
   const port = process.env.PORT || 4000;
   const logger = new Logger();
-
   app.enableCors({
-    origin: process.env.FRONTEND_URL,
+    origin: process.env.FRONT_URL,
     credentials: true,
   });
 
@@ -33,6 +32,7 @@ async function bootstrap() {
 
   await app.listen(port, ()=>{
     logger.log(`Server is running on http://localhost:${port}`);
+
   });
 
 
