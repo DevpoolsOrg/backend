@@ -25,10 +25,6 @@ export class PostgresDBExceptionsFilter implements ExceptionFilter {
       message: 'Internal server error',
     });
 
-    response.status(500).json({
-      statusCode: 500,
-      message: 'Internal server error',
-    });
   }
 
 };
