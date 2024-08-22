@@ -45,8 +45,10 @@ export class AuthController {
   @Get('check-auth-status')
   @HttpCode(200)
   @Auth()
-  checkAuthStatus(@GetUser() user: User) {
-    return this.authService.checkAuthStatus(user);
+  async checkAuthStatus(@Res({ passthrough: true }) response: Response, @GetUser() user: User) {
+    const {access_token, user: userResponse}= await this.authService.checkAuthStatus(user);
+    response.cookie('access_token', access_token, { httpOnly: true, secure: true, sameSite:"none" });
+    return { user: userResponse, access_token };
   };
 
   @Patch('change-password')
