@@ -5,7 +5,7 @@ import { Repository } from 'typeorm';
 import { User } from './entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { bcrypt } from 'src/common/helpers/bcrypt';
-import { ChangeRoleDto, UserAvatarDto } from './dto';
+import { ChangeRoleDto, CreateUserRolesDto, UserAvatarDto } from './dto';
 import { ValidRoles } from 'src/auth/interfaces';
 
 @Injectable()
@@ -24,6 +24,15 @@ export class UsersService {
     if(!newUser) throw new BadRequestException('User not created');
     return newUser;
   };
+
+  async createUserWhitRole(createUserRolesDto: CreateUserRolesDto): Promise<User | null> {
+    const hashedPassword = await this.hashPassword(createUserRolesDto.password);
+    const user = this.usersRepository.create({...createUserRolesDto, password: hashedPassword});
+    const newUser = await this.usersRepository.save(user);
+    if(!newUser) throw new BadRequestException('User not created');
+    return newUser;
+  };
+
 
   async findAll(): Promise<User[] | null> {
     const users = await this.usersRepository.find();
