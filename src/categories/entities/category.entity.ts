@@ -1,14 +1,19 @@
-import { Column, PrimaryGeneratedColumn } from "typeorm";
+import { Post } from "src/posts/entities/post.entity";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
-
+@Entity()
 export class Category {
 @PrimaryGeneratedColumn('uuid')
 id : string;
 
 @Column('text')
-nombre: string;
+name: string;
 
 @Column('text')
-descripcion: string;
+description: string;
+
+@OneToMany(() => Post, post => post.category)   
+
+    posts: Post[];
 
 };

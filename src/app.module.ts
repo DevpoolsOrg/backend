@@ -6,6 +6,7 @@ import { EnvsValidationSchema } from './config/envs.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
 import { CategoriesModule } from './categories/categories.module';
+import { PostsModule } from './posts/posts.module';
 
 
 
@@ -28,6 +29,7 @@ import { CategoriesModule } from './categories/categories.module';
     UsersModule,
     CommonModule,
     CategoriesModule,
+    PostsModule,
   ],
 })
 export class AppModule { }

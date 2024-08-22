@@ -1,15 +1,14 @@
 import { IsNotEmpty, IsString } from "class-validator";
 
-export class CreateCategoryDto {
-    
+export class CreatePostDto {
+   
     @IsString()
     @IsNotEmpty()
-    name: string;
-    
+    title: string;
 
     @IsString()
     @IsNotEmpty()
-    description: string;
+    content: string;
 
-};
- 
+
+}

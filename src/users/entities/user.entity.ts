@@ -1,6 +1,7 @@
 import { Exclude } from "class-transformer";
 import { ValidRoles } from "src/auth/interfaces";
-import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Post } from "src/posts/entities/post.entity";
+import { BeforeInsert, BeforeUpdate, Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 
 @Entity()
@@ -29,6 +30,10 @@ export class User {
 
     @Column('bool', {default: true})
     isActive: boolean;
+
+    @OneToMany(() => Post, post => post.user)
+    posts: Post[];
+    
 
     @CreateDateColumn()
     @Exclude({'toPlainOnly': true})
