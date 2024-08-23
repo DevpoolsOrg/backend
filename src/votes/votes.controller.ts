@@ -20,10 +20,10 @@ export class VotesController {
   };
 
   @Get(':postId')
-  findAll(
+  findAllByPost(
     @Param('postId') postId: string,
   ) {
-    return this.votesService.findAll(postId);
+    return this.votesService.findAllByPost(postId);
   };
 
   @Get(':id')

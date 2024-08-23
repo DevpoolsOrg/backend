@@ -29,10 +29,13 @@ export class VotesService {
     return this.voteRepository.save(vote);
   };
 
-  async findAll(postId: string) {
+  async findAllByPost(postId: string) {
     const post = await this.postsService.findOne(postId);
     if (!post) throw new BadRequestException('Post not found');
-    return this.voteRepository.find({where: {post}});
+    const votes = await this.voteRepository.find({
+      where: { post: { id: postId } }
+    });
+    return votes;
     
   };
 
