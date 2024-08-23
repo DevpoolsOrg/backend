@@ -20,7 +20,6 @@ export class UsersService {
     const hashedPassword = await this.hashPassword(createUserDto.password);
     const user = this.usersRepository.create({...createUserDto, password: hashedPassword});
     const newUser = await this.usersRepository.save(user);
-    console.log(newUser);
     if(!newUser) throw new BadRequestException('User not created');
     return newUser;
   };
@@ -100,6 +99,9 @@ export class UsersService {
     return await bcrypt.compare(password, hash);
   };
 
+  async deleteAll() {
+    await this.usersRepository.delete({});
+  }
 
 
 
