@@ -7,6 +7,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CommonModule } from './common/common.module';
 import { CategoriesModule } from './categories/categories.module';
 import { PostsModule } from './posts/posts.module';
+import { VotesModule } from './votes/votes.module';
+
 
 
 
@@ -30,6 +32,7 @@ import { PostsModule } from './posts/posts.module';
     CommonModule,
     CategoriesModule,
     PostsModule,
+    VotesModule,
   ],
 })
 export class AppModule { }
