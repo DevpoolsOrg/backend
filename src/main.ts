@@ -13,7 +13,10 @@ async function bootstrap() {
   const port = process.env.PORT || 4000;
   const logger = new Logger();
   app.enableCors({
-    origin: process.env.FRONT_URL,
+    origin:[
+      process.env.FRONT_URL!,
+      'http://localhost:5173',
+    ],
     credentials: true,
   });
 
