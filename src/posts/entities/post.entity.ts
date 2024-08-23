@@ -27,7 +27,7 @@ export class Post {
     @Column('boolean', {default: true})
     isPublished: boolean;
     
-    @OneToMany(() => Vote, vote => vote.post)
+    @OneToMany(() => Vote, vote => vote.post, {eager: true})
     votes: Vote[];
     
     @CreateDateColumn()
