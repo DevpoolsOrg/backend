@@ -1,7 +1,8 @@
 import { Exclude } from "class-transformer";
 import { Category } from "src/categories/entities/category.entity";
 import { User } from "src/users/entities/user.entity";
-import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Vote } from "src/votes/entities/vote.entity";
+import { Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Post {
@@ -14,7 +15,10 @@ export class Post {
     @Column('text')
     content: string;
 
-    @ManyToOne(() => User, user => user.posts)
+    @Column('text')
+    temathicArea: string;
+
+    @ManyToOne(() => User, user => user.posts,{eager: true})
     user: User;
 
     @ManyToOne(() => Category, category => category.posts, {eager: true})
@@ -22,7 +26,9 @@ export class Post {
 
     @Column('boolean', {default: true})
     isPublished: boolean;
-
+    
+    @OneToMany(() => Vote, vote => vote.post)
+    votes: Vote[];
     
     @CreateDateColumn()
     @Exclude({'toPlainOnly': true})
